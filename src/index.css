@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Reset leve + base do projeto */
+/* Reset Page */
 * {
   margin: 0;
   padding: 0;
@@ -14,13 +14,18 @@ html, body, #root {
   height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #000;
   color: #fff;
   font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
 }
 
-/* Hero Animated Background (Fiery Blobs) */
+/* Hero Animated Background */
 .glow-bg {
   background-color: #000;
   position: absolute;
@@ -36,7 +41,6 @@ body {
   will-change: transform, opacity;
 }
 
-/* Top Left Blob */
 .glow-1 {
   width: 60vw;
   height: 60vw;
@@ -48,7 +52,6 @@ body {
   animation: glow-float-1 12s ease-in-out infinite alternate;
 }
 
-/* Bottom Right Blob */
 .glow-2 {
   width: 70vw;
   height: 70vw;
@@ -60,7 +63,6 @@ body {
   animation: glow-float-2 15s ease-in-out infinite alternate;
 }
 
-/* Middle Filler Blob */
 .glow-3 {
   width: 50vw;
   height: 50vw;

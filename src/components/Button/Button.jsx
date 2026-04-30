@@ -29,15 +29,19 @@ export default function Button({
     secondary: "bg-gradient-to-r from-[#F85300] to-[#FF8700] text-[#111111]",
   };
 
+  const Component = props.href ? "a" : "button";
+
   return (
-    <button
-      className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
-      {...props}
+  <Component
+    {...props}
+    className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+  >
+    {children}
+
+    <span
+      className={`${iconColors[variant]} ${iconSizeClasses[size]} rounded-full flex items-center justify-center shrink-0`}
     >
-      {children}
-      <span
-        className={`${iconColors[variant]} ${iconSizeClasses[size]} rounded-full flex items-center justify-center shrink-0`}
-      >
+
         <svg
           width={size === "small" ? "14" : "15"}
           height={size === "small" ? "14" : "15"}
@@ -52,6 +56,6 @@ export default function Button({
           <path d="M7 7h10v10" />
         </svg>
       </span>
-    </button>
+    </Component>
   );
 }

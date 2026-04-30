@@ -17,7 +17,7 @@ export default function Hero() {
       {/* HEADER */}
       <div className="absolute top-0 left-0 w-full p-10 lg:px-24 z-40 flex justify-between items-center">
         <img src={logo} alt="Lima Logo" className="h-10 md:h-14" />
-        <Button variant="secondary" size="small">
+        <Button variant="secondary" size="small" href="https://x.com/thelimaofficial" target="_blank" rel="noopener noreferrer">
           Get in touch
         </Button>
       </div>
@@ -35,11 +35,11 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-wrap justify-center items-center gap-6">
-            <Button variant="primary" size="normal">
+            <Button variant="primary" size="normal" href="#projects">
               View Projects
             </Button>
             
-            <Button variant="secondary" size="normal">
+            <Button variant="secondary" size="normal" href="https://x.com/thelimaofficial" target="_blank" rel="noopener noreferrer">
               Get in touch
             </Button>
           </div>
