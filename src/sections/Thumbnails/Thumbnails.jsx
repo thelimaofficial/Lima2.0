@@ -7,33 +7,33 @@ import img3 from "../../assets/images/carousel/3.webp";
 
 export default function Thumbnails({ id }) {
   return (
-    <Section id={id} className="bg-[#0f0f0f] py-24 md:py-32 overflow-hidden">
-      <div className="w-full px-4 md:px-10 lg:px-16 xl:px-24 mx-auto max-w-[1800px]">
+    <Section id={id} className="bg-[#0f0f0f] py-20 md:py-28 lg:py-32 overflow-hidden">
+      <Container>
         <div className="mb-16 md:mb-20">
-          <h2 className="text-[28px] md:text-[36px] font-bold text-white mb-1 leading-tight">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] font-bold text-white mb-2 leading-tight">
             Thumbnails
           </h2>
-          <h3 className="text-[40px] sm:text-[52px] md:text-[64px] font-bold text-white uppercase leading-[1.1] tracking-tight">
+          <h3 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] font-bold text-white uppercase leading-[1.1] tracking-tight">
             BUILT FOR <span className="text-[#FF8700]">CLICKS</span>
           </h3>
         </div>
+      </Container>
 
-        {/* Static mock for the future animated carousel */}
-        <div className="relative flex justify-center items-center w-full mx-auto h-[200px] sm:h-[300px] md:h-[400px] lg:h-[450px] xl:h-[500px]">
-          {/* Left Thumbnail */}
-          <div className="absolute left-[-5%] sm:left-[-2%] md:left-[2%] w-[55%] md:w-[40%] z-0 brightness-50 transform scale-[0.85] transition-all duration-300">
-            <img src={img1} alt="Thumbnail Left" className="w-full rounded-2xl md:rounded-[32px] shadow-xl object-cover" />
-          </div>
+      {/* Static mock for the future animated carousel - OUTSIDE Container */}
+      <div className="relative flex justify-center items-center w-full mx-auto h-[220px] sm:h-[320px] md:h-[420px] lg:h-[520px]">
+        {/* Left Thumbnail */}
+        <div className="absolute left-[-15%] md:left-[0%] w-[60%] md:w-[45%] z-0 opacity-60 blur-[2px] transform scale-75 md:scale-[0.85] transition-all duration-300">
+          <img src={img1} alt="Thumbnail Left" className="w-full rounded-2xl md:rounded-[32px] shadow-xl object-cover" />
+        </div>
 
-          {/* Right Thumbnail */}
-          <div className="absolute right-[-5%] sm:right-[-2%] md:right-[2%] w-[55%] md:w-[40%] z-0 brightness-50 transform scale-[0.85] transition-all duration-300">
-            <img src={img3} alt="Thumbnail Right" className="w-full rounded-2xl md:rounded-[32px] shadow-xl object-cover" />
-          </div>
+        {/* Right Thumbnail */}
+        <div className="absolute right-[-15%] md:right-[0%] w-[60%] md:w-[45%] z-0 opacity-60 blur-[2px] transform scale-75 md:scale-[0.85] transition-all duration-300">
+          <img src={img3} alt="Thumbnail Right" className="w-full rounded-2xl md:rounded-[32px] shadow-xl object-cover" />
+        </div>
 
-          {/* Center Thumbnail */}
-          <div className="relative z-10 w-[65%] md:w-[45%] shadow-[0_0_80px_rgba(0,0,0,0.6)] rounded-2xl md:rounded-[40px] overflow-hidden transition-all duration-300 transform scale-105">
-            <img src={img2} alt="Thumbnail Center" className="w-full h-auto object-cover relative z-10" />
-          </div>
+        {/* Center Thumbnail */}
+        <div className="relative z-10 w-[70%] md:w-[50%] shadow-[0_0_80px_rgba(0,0,0,0.8)] rounded-2xl md:rounded-[40px] overflow-hidden transition-all duration-300 transform scale-100 md:scale-105">
+          <img src={img2} alt="Thumbnail Center" className="w-full h-auto object-cover relative z-10" />
         </div>
       </div>
     </Section>
