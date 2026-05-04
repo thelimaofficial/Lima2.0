@@ -7,14 +7,14 @@ import img3 from "../../assets/images/carousel/3.webp";
 
 export default function Thumbnails({ id }) {
   return (
-    <Section id={id} className="bg-[#0f0f0f] py-20 md:py-28 lg:py-32 overflow-hidden">
+    <Section id={id} className="bg-[#090909] py-20 md:py-28 lg:py-32 overflow-hidden">
       <Container>
         <div className="mb-16 md:mb-20">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] font-bold text-white mb-2 leading-tight">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
             Thumbnails
           </h2>
-          <h3 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] font-bold text-white uppercase leading-[1.1] tracking-tight">
-            BUILT FOR <span className="text-[#FF8700]">CLICKS</span>
+          <h3 className="text-4xl md:text-6xl font-bold text-white uppercase tracking-tight">
+            BUILT FOR <span className="bg-gradient-to-r from-[#F85300] to-[#FF8700] bg-clip-text text-transparent">CLICKS</span>
           </h3>
         </div>
       </Container>

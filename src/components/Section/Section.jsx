@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function Section({ children, className = "" }) {
+export default function Section({ children, className = "", ...props }) {
   return (
-    <section className={`relative w-full ${className}`}>
+    <section className={`relative w-full ${className}`} {...props}>
       {children}
     </section>
   );

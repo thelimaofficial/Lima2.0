@@ -10,8 +10,8 @@ export default function Button({
   const baseClasses = "text-white rounded-full font-normal flex items-center transition-all";
 
   const sizeClasses = {
-    normal: "pl-6 pr-1.5 py-1.5 text-[14px] md:text-[15px] gap-6",
-    small: "pl-5 pr-1.5 py-1.5 text-[13px] md:text-[14px] gap-4",
+    normal: "pl-5 pr-1.5 py-1.5 text-[15px] gap-2",
+    small: "pl-5 pr-1.5 py-1.5 text-[14px] gap-2",
   };
 
   const variantClasses = {

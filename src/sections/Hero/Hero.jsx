@@ -25,7 +25,7 @@ export default function Hero() {
       </div>
 
       {/* CONTEÚDO */}
-      <Container className="relative z-10 flex flex-col items-center text-center mt-16 sm:mt-0">
+      <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-8 md:px-12 lg:px-24 relative z-10 flex flex-col items-center text-center mt-16 sm:mt-0">
 
           <h1 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[64px] font-bold leading-[1.1] tracking-tight mb-6 md:mb-8">
             Helping companies build <span className="bg-gradient-to-r from-[#F85300] to-[#FF8700] bg-clip-text text-transparent">digital products</span> that actually convert<span className="text-[#ff8700]">.</span>
@@ -36,16 +36,16 @@ export default function Hero() {
             scalable and conversion-focused digital experiences.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full sm:w-auto px-4 sm:px-0">
-            <Button variant="primary" size="normal" href="#projects" className="w-full sm:w-auto justify-center">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 px-4 sm:px-0">
+            <Button variant="primary" size="normal" href="#projects">
               View Projects
             </Button>
             
-            <Button variant="secondary" size="normal" href="https://x.com/thelimaofficial" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto justify-center">
-              Get in touch
+            <Button variant="secondary" size="normal" href="https://x.com/thelimaofficial" target="_blank" rel="noopener noreferrer">
+              Get in touch&nbsp;&nbsp;
             </Button>
           </div>
-      </Container>
+      </div>
     </Section>
   );
 }

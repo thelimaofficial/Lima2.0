@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Container({ children, className = "" }) {
   return (
-    <div className={`w-full max-w-[1400px] mx-auto px-6 sm:px-8 md:px-12 lg:px-24 ${className}`}>
+    <div className={`w-full px-4 sm:px-6 md:px-8 mx-auto ${className}`}>
       {children}
     </div>
   );
