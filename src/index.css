@@ -74,6 +74,28 @@ body {
   animation: glow-float-3 18s ease-in-out infinite alternate;
 }
 
+/* Barra inteira */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Fundo */
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+/* Parte que arrasta */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ff7a00, #ff8700);
+  border-radius: 0; /* quadrada */
+}
+
+/* Hover (opcional) */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ff8700, #ff7a00);
+}
+
+
 @keyframes glow-float-1 {
   0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
   100% { transform: translate(15vw, 10vh) scale(1.15); opacity: 1; }
