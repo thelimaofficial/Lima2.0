@@ -15,21 +15,19 @@ html, body, #root {
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
 body {
-  background-color: #000;
+  background-color: #090909;
   color: #fff;
   font-family: 'Inter', sans-serif;
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
 /* Hero Animated Background */
 .glow-bg {
-  background-color: #000;
+  background-color: #090909;
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -89,4 +87,21 @@ body {
 @keyframes glow-float-3 {
   0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
   100% { transform: translate(-10vw, 15vh) scale(1.25); opacity: 0.9; }
+}
+
+/* Lenis Smooth Scroll Base Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }

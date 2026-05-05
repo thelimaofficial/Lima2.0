@@ -90,7 +90,7 @@ export default function Footer() {
           {/* Logo & Copyright Section (Mobile: Bottom, Desktop: Left) */}
           <div className="flex flex-col items-center lg:items-start h-full w-full lg:w-auto order-2 lg:order-1 mt-16 lg:mt-0">
             <img src={logo} alt="Lima Logo" className="h-24 sm:h-32 lg:h-40 object-contain mb-8 lg:mb-16 origin-center lg:origin-left" />
-            <div className="text-[#888888] text-sm font-medium text-center lg:text-left mb-4 lg:mb-0">
+            <div className="text-[#e8e8e8] text-sm font-medium text-center lg:text-left mb-4 lg:mb-0">
               &copy; 2026 Lima. All rights reserved.
             </div>
             {/* Mobile Privacy Policy */}

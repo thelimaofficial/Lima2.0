@@ -31,9 +31,28 @@ export default function Button({
 
   const Component = props.href ? "a" : "button";
 
+  const handleClick = (e) => {
+    // Se for um link de âncora (ex: #websites), usa o Lenis para rolar suavemente
+    if (props.href && props.href.startsWith("#")) {
+      e.preventDefault();
+      if (window.lenis) {
+        window.lenis.scrollTo(props.href);
+      } else {
+        // Fallback nativo caso o lenis ainda não esteja carregado
+        document.querySelector(props.href)?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    
+    // Executa a função onClick original se ela existir
+    if (props.onClick) {
+      props.onClick(e);
+    }
+  };
+
   return (
   <Component
     {...props}
+    onClick={handleClick}
     className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
   >
     {children}
