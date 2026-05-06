@@ -72,22 +72,22 @@ export default function Thumbnails({ id }) {
 
       // Passo 1: Vem da Direita Extrema para a Direita (Começa no tempo i-2)
       if (i - 2 >= 0) {
-        tl.fromTo(el, states.farRight, { ...states.right, duration: 1, ease: easeType, immediateRender: false }, i - 2);
+        tl.to(el, { ...states.right, duration: 1, ease: easeType }, i - 2);
       }
       
       // Passo 2: Vem da Direita para o Centro (Começa no tempo i-1)
       if (i - 1 >= 0) {
-        tl.fromTo(el, states.right, { ...states.center, duration: 1, ease: easeType, immediateRender: false }, i - 1);
+        tl.to(el, { ...states.center, duration: 1, ease: easeType }, i - 1);
       }
 
       // Passo 3: Vai do Centro para a Esquerda (Começa no tempo i)
       if (i < TOTAL - 1) {
-        tl.fromTo(el, states.center, { ...states.left, duration: 1, ease: easeType, immediateRender: false }, i);
+        tl.to(el, { ...states.left, duration: 1, ease: easeType }, i);
       }
 
       // Passo 4: Vai da Esquerda para a Esquerda Extrema (Começa no tempo i+1)
       if (i + 1 < TOTAL - 1) {
-        tl.fromTo(el, states.left, { ...states.farLeft, duration: 1, ease: easeType, immediateRender: false }, i + 1);
+        tl.to(el, { ...states.farLeft, duration: 1, ease: easeType }, i + 1);
       }
     });
 
