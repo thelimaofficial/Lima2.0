@@ -1,20 +1,59 @@
-import Hero from "../sections/Hero/Hero";
-import CTA from "../sections/CTA/CTA";
-import Thumbnails from "../sections/Thumbnails/Thumbnails";
-import Websites from "../sections/Websites/Websites";
-import About from "../sections/About/About";
-import Footer from "../sections/Footer/Footer";
+import React, { Suspense, lazy } from "react";
 
+// =========================
+// SECTIONS
+// =========================
+
+const HeroCTATransition = lazy(() =>
+  import("../sections/HeroCTATransition/HeroCTATransition")
+);
+
+const Thumbnails = lazy(() =>
+  import("../sections/Thumbnails/Thumbnails")
+);
+
+const Websites = lazy(() =>
+  import("../sections/Websites/Websites")
+);
+
+const About = lazy(() =>
+  import("../sections/About/About")
+);
+
+const FeedbacksFooterSection = lazy(() =>
+  import("../sections/Feedbacks/Feedbacks")
+);
 
 export default function Home() {
   return (
-    <main className="bg-black text-white overflow-x-hidden">
-      <Hero />
-      <CTA />
-      <Thumbnails id="projects"/>
-      <Websites />
-      <About />
-      <Footer />
+    <main
+      className="
+        min-h-screen
+        bg-[#090909]
+        text-white
+      "
+    >
+      <Suspense fallback={null}>
+        {/* HERO */}
+
+        <HeroCTATransition />
+
+        {/* THUMBNAILS */}
+
+        <Thumbnails id="projects" />
+
+        {/* WEBSITES */}
+
+        <Websites />
+
+        {/* ABOUT */}
+
+        <About />
+
+        {/* FEEDBACKS */}
+
+        <FeedbacksFooterSection />
+      </Suspense>
     </main>
   );
 }

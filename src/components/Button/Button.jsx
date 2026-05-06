@@ -2,65 +2,168 @@ import React from "react";
 
 export default function Button({
   children,
+
   variant = "primary",
+
   size = "normal",
+
   className = "",
+
+  onClick,
+
+  href,
+
   ...props
 }) {
-  const baseClasses = "text-white rounded-full font-normal flex items-center transition-all";
+  // =========================
+  // COMPONENT TYPE
+  // =========================
+
+  const isLink = Boolean(href);
+
+  const Component = isLink ? "a" : "button";
+
+  // =========================
+  // STYLES
+  // =========================
+
+  const baseClasses = `
+    inline-flex
+    items-center
+    rounded-full
+    font-normal
+    text-white
+
+    transition-transform
+    transition-colors
+    duration-300
+
+    hover:scale-[1.02]
+    active:scale-[0.98]
+
+    focus:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-[#ff7a00]
+    focus-visible:ring-offset-2
+    focus-visible:ring-offset-[#090909]
+  `;
 
   const sizeClasses = {
-    normal: "pl-5 pr-1.5 py-1.5 text-[15px] gap-2",
-    small: "pl-5 pr-1.5 py-1.5 text-[14px] gap-2",
+    normal:
+      "pl-5 pr-1.5 py-1.5 text-[15px] gap-2",
+
+    small:
+      "pl-5 pr-1.5 py-1.5 text-[14px] gap-2",
   };
 
   const variantClasses = {
-    primary: "bg-gradient-to-r from-[#F85300] to-[#FF8700] hover:bg-[#e06c00] border border-transparent",
-    secondary: "bg-[#111111]/70 border border-[#333333] hover:border-[#555555]",
+    primary: `
+      bg-gradient-to-r
+      from-[#F85300]
+      to-[#FF8700]
+
+      hover:brightness-110
+    `,
+
+    secondary: `
+      border
+      border-[#333333]
+
+      bg-[#111111]/70
+
+      hover:border-[#555555]
+      hover:bg-[#1a1a1a]
+    `,
   };
 
   const iconSizeClasses = {
     normal: "w-[34px] h-[34px]",
+
     small: "w-[28px] h-[28px]",
   };
 
   const iconColors = {
-    primary: "bg-[#111111] text-[#ff7a00]",
-    secondary: "bg-gradient-to-r from-[#F85300] to-[#FF8700] text-[#111111]",
+    primary: `
+      bg-[#111111]
+      text-[#ff7a00]
+    `,
+
+    secondary: `
+      bg-gradient-to-r
+      from-[#F85300]
+      to-[#FF8700]
+
+      text-[#111111]
+    `,
   };
 
-  const Component = props.href ? "a" : "button";
+  // =========================
+  // CLICK HANDLER
+  // =========================
 
   const handleClick = (e) => {
-    // Se for um link de âncora (ex: #websites), usa o Lenis para rolar suavemente
-    if (props.href && props.href.startsWith("#")) {
+    // Anchor scroll with Lenis
+
+    if (href && href.startsWith("#")) {
       e.preventDefault();
+
       if (window.lenis) {
-        window.lenis.scrollTo(props.href);
+        window.lenis.scrollTo(href, {
+          duration: 1.2,
+        });
       } else {
-        // Fallback nativo caso o lenis ainda não esteja carregado
-        document.querySelector(props.href)?.scrollIntoView({ behavior: "smooth" });
+        document
+          .querySelector(href)
+          ?.scrollIntoView({
+            behavior: "smooth",
+          });
       }
     }
-    
-    // Executa a função onClick original se ela existir
-    if (props.onClick) {
-      props.onClick(e);
+
+    // External onClick
+
+    if (onClick) {
+      onClick(e);
     }
   };
 
   return (
-  <Component
-    {...props}
-    onClick={handleClick}
-    className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
-  >
-    {children}
-
-    <span
-      className={`${iconColors[variant]} ${iconSizeClasses[size]} rounded-full flex items-center justify-center shrink-0`}
+    <Component
+      {...props}
+      href={href}
+      onClick={handleClick}
+      className={`
+        ${baseClasses}
+        ${sizeClasses[size]}
+        ${variantClasses[variant]}
+        ${className}
+      `}
+      type={!isLink ? "button" : undefined}
     >
+      {/* TEXT */}
 
+      <span>{children}</span>
+
+      {/* ICON */}
+
+      <span
+        className={`
+          ${iconColors[variant]}
+          ${iconSizeClasses[size]}
+
+          flex
+          shrink-0
+          items-center
+          justify-center
+
+          rounded-full
+
+          transition-transform
+          duration-300
+
+          group-hover:translate-x-[2px]
+        `}
+      >
         <svg
           width={size === "small" ? "14" : "15"}
           height={size === "small" ? "14" : "15"}
@@ -72,6 +175,7 @@ export default function Button({
           strokeLinejoin="round"
         >
           <path d="M7 17L17 7" />
+
           <path d="M7 7h10v10" />
         </svg>
       </span>
