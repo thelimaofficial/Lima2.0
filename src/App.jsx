@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
 
+import { useEffect } from "react";
 import Home from "./pages/Home";
 
 import Lenis from "lenis";

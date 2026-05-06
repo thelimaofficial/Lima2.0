@@ -1,6 +1,6 @@
+import { useRef } from "react";
 import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
-import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";

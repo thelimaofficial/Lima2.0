@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function Section({ children, className = "", ...props }) {
   return (
