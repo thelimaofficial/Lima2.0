@@ -26,9 +26,7 @@ export default function Websites() {
       aria-label="Website projects"
       className="bg-[#090909] py-20 md:py-28 overflow-hidden"
     >
-      {/* ========================= */}
       {/* HEADING */}
-      {/* ========================= */}
 
       <Container>
         <div className="mb-16 max-w-[900px] md:mb-24">
@@ -46,9 +44,7 @@ export default function Websites() {
         </div>
       </Container>
 
-      {/* ========================= */}
       {/* PROJECTS */}
-      {/* ========================= */}
 
       <div className="space-y-20 md:space-y-28 lg:space-y-36">
         {projects.map((project) => (

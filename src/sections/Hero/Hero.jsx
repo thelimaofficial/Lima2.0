@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <Section className="h-screen text-white overflow-hidden flex items-center !py-0 hero-section">
 
-      {/* BACKGROUND ANIMADO */}
+      {/* ANIMATED BACKGROUND */}
       <div className="glow-bg hero-glow">
         <div className="glow-layer glow-1"></div>
         <div className="glow-layer glow-2"></div>
@@ -22,7 +22,7 @@ export default function Hero() {
         </Button>
       </div>
 
-      {/* CONTEÚDO */}
+      {/* CONTENT */}
       <Container className="relative z-10 hero-content">
         <div className="flex flex-col items-center text-center max-w-6xl mx-auto">
           <h1 className="text-[40px] md:text-[70px] font-bold leading-[1.05] tracking-tighter mb-8 max-w-[1100px]">
