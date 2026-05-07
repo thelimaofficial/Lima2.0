@@ -419,7 +419,7 @@ export default function FeedbacksFooterSection({ id }) {
                 <img
                   src={logo}
                   alt="Lima Logo"
-                  className="mb-2 md:mb-4 h-16 origin-center object-contain sm:h-28 lg:h-32 lg:origin-left"
+                  className="mb-2 md:mb-4 h-20 origin-center object-contain sm:h-36 lg:h-48 lg:origin-left"
                 />
 
                 <div className="text-center text-sm text-[#888] lg:text-left flex flex-col gap-3">
