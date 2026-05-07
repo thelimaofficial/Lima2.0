@@ -1,4 +1,3 @@
-
 export default function Button({
   children,
 
@@ -14,13 +13,17 @@ export default function Button({
 
   ...props
 }) {
+  // =========================
   // COMPONENT TYPE
+  // =========================
 
   const isLink = Boolean(href);
 
   const Component = isLink ? "a" : "button";
 
+  // =========================
   // STYLES
+  // =========================
 
   const baseClasses = `
     inline-flex
@@ -92,7 +95,9 @@ export default function Button({
     `,
   };
 
+  // =========================
   // CLICK HANDLER
+  // =========================
 
   const handleClick = (e) => {
     // Anchor scroll with Lenis

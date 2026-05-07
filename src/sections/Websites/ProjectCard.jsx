@@ -16,7 +16,9 @@ export default function ProjectCard({ image, alt }) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // =========================
       // INITIAL STATES
+      // =========================
 
       gsap.set(cardRef.current, {
         scale: 0.86,
@@ -34,7 +36,9 @@ export default function ProjectCard({ image, alt }) {
         opacity: 0.45,
       });
 
+      // =========================
       // TIMELINE
+      // =========================
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -50,7 +54,9 @@ export default function ProjectCard({ image, alt }) {
         },
       });
 
+      // =========================
       // CARD SCALE
+      // =========================
 
       tl.to(
         cardRef.current,
@@ -66,7 +72,9 @@ export default function ProjectCard({ image, alt }) {
         0
       );
 
+      // =========================
       // IMAGE SCALE
+      // =========================
 
       tl.to(
         imageRef.current,
@@ -80,7 +88,9 @@ export default function ProjectCard({ image, alt }) {
         0
       );
 
+      // =========================
       // OVERLAY FADE
+      // =========================
 
       tl.to(
         overlayRef.current,
@@ -104,9 +114,7 @@ export default function ProjectCard({ image, alt }) {
       className="relative mb-16 overflow-hidden md:mb-24"
     >
       <div className="flex justify-center px-4 md:px-8">
-        {/* ========================= */}
         {/* CARD */}
-        {/* ========================= */}
 
         <div
           ref={cardRef}
@@ -118,9 +126,7 @@ export default function ProjectCard({ image, alt }) {
             shadow-[0_20px_80px_rgba(0,0,0,0.45)]
           "
         >
-          {/* ========================= */}
           {/* IMAGE */}
-          {/* ========================= */}
 
           <img
             ref={imageRef}
@@ -137,9 +143,7 @@ export default function ProjectCard({ image, alt }) {
             draggable="false"
           />
 
-          {/* ========================= */}
           {/* DARK OVERLAY */}
-          {/* ========================= */}
 
           <div
             ref={overlayRef}

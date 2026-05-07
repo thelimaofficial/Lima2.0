@@ -1,5 +1,5 @@
-
 import { useEffect } from "react";
+
 import Home from "./pages/Home";
 
 import Lenis from "lenis";
@@ -11,26 +11,32 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
+    // =========================
     // LENIS SETUP
+    // =========================
 
     const lenis = new Lenis({
-      duration: 0.9,
+      duration: 1.2, // Aumentado para uma desaceleração mais suave
 
       easing: (t) =>
         Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 
       smoothWheel: true,
-      smoothTouch: false,
+      syncTouch: true, // Mantém a sincronização de touch
 
       wheelMultiplier: 1,
-      touchMultiplier: 1,
+      touchMultiplier: 1.2, // Reduzido de 2 para 1.2 para ficar menos brusco e mais fluído
     });
 
+    // =========================
     // GLOBAL ACCESS
+    // =========================
 
     window.lenis = lenis;
 
+    // =========================
     // GSAP + LENIS SYNC
+    // =========================
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -44,7 +50,9 @@ function App() {
     // Prevent GSAP delay smoothing conflicts
     gsap.ticker.lagSmoothing(0);
 
+    // =========================
     // SCROLLER PROXY
+    // =========================
 
     ScrollTrigger.scrollerProxy(document.body, {
       scrollTop(value) {
@@ -71,7 +79,9 @@ function App() {
         : "fixed",
     });
 
+    // =========================
     // REFRESH HANDLING
+    // =========================
 
     const onRefresh = () => lenis.resize();
 
@@ -79,7 +89,9 @@ function App() {
 
     ScrollTrigger.refresh();
 
+    // =========================
     // CLEANUP
+    // =========================
 
     return () => {
       ScrollTrigger.removeEventListener(
