@@ -16,9 +16,7 @@ export default function ProjectCard({ image, alt }) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // =========================
       // INITIAL STATES
-      // =========================
 
       gsap.set(cardRef.current, {
         scale: 0.86,
@@ -36,9 +34,7 @@ export default function ProjectCard({ image, alt }) {
         opacity: 0.45,
       });
 
-      // =========================
       // TIMELINE
-      // =========================
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -54,9 +50,7 @@ export default function ProjectCard({ image, alt }) {
         },
       });
 
-      // =========================
       // CARD SCALE
-      // =========================
 
       tl.to(
         cardRef.current,
@@ -72,9 +66,7 @@ export default function ProjectCard({ image, alt }) {
         0
       );
 
-      // =========================
       // IMAGE SCALE
-      // =========================
 
       tl.to(
         imageRef.current,
@@ -88,9 +80,7 @@ export default function ProjectCard({ image, alt }) {
         0
       );
 
-      // =========================
       // OVERLAY FADE
-      // =========================
 
       tl.to(
         overlayRef.current,

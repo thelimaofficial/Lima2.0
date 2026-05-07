@@ -1,15 +1,10 @@
+
 import { lazy, Suspense } from "react";
 
-// =========================
 // SECTIONS
-// =========================
 
-const Hero = lazy(() =>
-  import("../sections/Hero/Hero")
-);
-
-const CTA = lazy(() =>
-  import("../sections/CTA/CTA")
+const HeroCTATransition = lazy(() =>
+  import("../sections/HeroCTATransition/HeroCTATransition")
 );
 
 const Thumbnails = lazy(() =>
@@ -38,11 +33,24 @@ export default function Home() {
       "
     >
       <Suspense fallback={null}>
-        <Hero />
-        <CTA />
+        {/* HERO */}
+
+        <HeroCTATransition />
+
+        {/* THUMBNAILS */}
+
         <Thumbnails id="projects" />
+
+        {/* WEBSITES */}
+
         <Websites />
+
+        {/* ABOUT */}
+
         <About />
+
+        {/* FEEDBACKS */}
+
         <FeedbacksFooterSection />
       </Suspense>
     </main>

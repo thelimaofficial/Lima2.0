@@ -77,9 +77,7 @@ export default function FeedbacksFooterSection({ id }) {
     const ctx = gsap.context(() => {
       const cards = cardsRef.current;
 
-      // =========================
       // INITIAL STATES
-      // =========================
 
       cards.forEach((card, i) => {
         const cfg = stackConfig[i] || {
@@ -121,9 +119,7 @@ export default function FeedbacksFooterSection({ id }) {
         }
       );
 
-      // =========================
       // TIMELINE
-      // =========================
 
       const cardStep = 1;
       const cardEntry = 0.8;
@@ -143,9 +139,7 @@ export default function FeedbacksFooterSection({ id }) {
         },
       });
 
-      // =========================
       // CARDS STACK
-      // =========================
 
       cards.forEach((card, i) => {
         const cfg = stackConfig[i];
@@ -164,9 +158,7 @@ export default function FeedbacksFooterSection({ id }) {
         );
       });
 
-      // =========================
       // EXIT FEEDBACKS
-      // =========================
 
       tl.to(
         [headingRef.current, cardsAreaRef.current],
@@ -179,9 +171,7 @@ export default function FeedbacksFooterSection({ id }) {
         transitionStart
       );
 
-      // =========================
       // FOOTER ENTER
-      // =========================
 
       tl.to(
         footerRef.current,

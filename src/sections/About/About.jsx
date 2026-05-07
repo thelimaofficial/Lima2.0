@@ -19,18 +19,14 @@ export default function About({ id }) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // =========================
       // INITIAL STATES
-      // =========================
 
       gsap.set(contentRef.current, {
         y: 0,
         opacity: 1,
       });
 
-      // =========================
       // FLOATING IMAGE
-      // =========================
 
       gsap.to(imageRef.current, {
         y: -18,
@@ -44,9 +40,7 @@ export default function About({ id }) {
         ease: "sine.inOut",
       });
 
-      // =========================
       // SECTION EXIT
-      // =========================
 
       gsap.to(contentRef.current, {
         y: -80,
