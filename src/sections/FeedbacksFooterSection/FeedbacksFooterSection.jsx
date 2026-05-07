@@ -453,7 +453,7 @@ export default function FeedbacksFooterSection({ id }) {
                     {" • "}Developed by{" "}
 
                     <a
-                      href="#"
+                      href="https://usealwer.com/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="font-semibold text-white transition-opacity hover:opacity-80"
@@ -511,7 +511,7 @@ export default function FeedbacksFooterSection({ id }) {
                   {" • "}Developed by{" "}
 
                   <a
-                    href="#"
+                    href="https://usealwer.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold text-white transition-opacity hover:opacity-80"
