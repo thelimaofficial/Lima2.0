@@ -16,6 +16,11 @@ import behanceIcon from "../../assets/images/icons/behance.webp";
 import emailIcon from "../../assets/images/icons/email.webp";
 import wppIcon from "../../assets/images/icons/wpp.webp";
 
+import avatarMM from "../../assets/images/clients/motivation.webp";
+import avatarAC from "../../assets/images/clients/adventure.webp";
+import avatarVI from "../../assets/images/clients/vinxent.webp";
+import avatarMS from "../../assets/images/clients/midiascreen.webp";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
@@ -24,7 +29,7 @@ const testimonials = [
     quote: "Very good designer and a pleasure to work with :)",
     name: "Motivation Mentors",
     role: "YouTuber",
-    avatar: "MM",
+    avatar: avatarMM,
   },
   {
     id: 2,
@@ -32,7 +37,7 @@ const testimonials = [
       "The Lima is great to work with. Quick with communication and fast turnaround with the thumbnail design.",
     name: "The Adventure Crews",
     role: "YouTuber",
-    avatar: "AC",
+    avatar: avatarAC,
   },
   {
     id: 3,
@@ -40,7 +45,7 @@ const testimonials = [
       "Listened to every detail and executed it perfectly, highly recommend.",
     name: "Vinxent",
     role: "YouTuber",
-    avatar: "VI",
+    avatar: avatarVI,
   },
   {
     id: 4,
@@ -48,15 +53,15 @@ const testimonials = [
       "Professionalism from start to finish. The website he created for our company greatly boosted our credibility.",
     name: "MídiaScreen",
     role: "Empresa de Suporte Técnico",
-    avatar: "MS",
+    avatar: avatarMS,
   },
 ];
 
 const stackConfig = [
-  { rotation: -7, x: -55, y: 35, zIndex: 1 },
-  { rotation: 4.5, x: 45, y: -30, zIndex: 2 },
-  { rotation: -2.5, x: -20, y: 12, zIndex: 3 },
-  { rotation: 1.5, x: 18, y: -12, zIndex: 4 },
+  { rotation: -8, x: -80, y: 48, zIndex: 1 },
+  { rotation: 5.5, x: 65, y: -42, zIndex: 2 },
+  { rotation: -3.5, x: -32, y: 18, zIndex: 3 },
+  { rotation: 2, x: 28, y: -16, zIndex: 4 },
 ];
 
 export default function FeedbacksFooterSection({ id }) {
@@ -231,7 +236,7 @@ export default function FeedbacksFooterSection({ id }) {
       ref={wrapperRef}
       className="w-full bg-[#090909]"
     >
-      <div className="relative flex h-screen w-full flex-col overflow-hidden">
+      <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden">
         {/* ========================= */}
         {/* HEADING */}
         {/* ========================= */}
@@ -297,8 +302,8 @@ export default function FeedbacksFooterSection({ id }) {
               {/* USER */}
 
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F85300] to-[#FF8700] text-xs font-bold tracking-wider text-white shadow-[0_0_18px_rgba(255,106,0,0.4)]">
-                  {t.avatar}
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F85300] to-[#FF8700] text-xs font-bold tracking-wider text-white shadow-[0_0_18px_rgba(255,106,0,0.4)] overflow-hidden">
+                  <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
                 </div>
 
                 <div>
@@ -321,7 +326,7 @@ export default function FeedbacksFooterSection({ id }) {
 
         <footer
           ref={footerRef}
-          className="absolute inset-0 z-20 flex flex-col overflow-hidden px-0 py-10"
+          className="absolute inset-0 z-20 flex flex-col overflow-hidden px-0 py-6 md:py-10"
         >
           {/* GLOW */}
 
@@ -339,7 +344,7 @@ export default function FeedbacksFooterSection({ id }) {
 
             <div
               ref={footerTopRef}
-              className="flex flex-col items-start justify-between gap-8 xl:flex-row xl:items-center xl:gap-0"
+              className="flex flex-col items-start justify-between gap-6 xl:flex-row xl:items-center xl:gap-0"
             >
               {/* SOCIALS */}
 
@@ -351,22 +356,22 @@ export default function FeedbacksFooterSection({ id }) {
                     alt: "X",
                   },
                   {
-                    href: "#",
+                    href: "https://instagram.com/thelimaofficiall",
                     src: instagramIcon,
                     alt: "Instagram",
                   },
                   {
-                    href: "#",
+                    href: "https://linkedin.com/in/thelimaofficial",
                     src: linkedinIcon,
                     alt: "LinkedIn",
                   },
                   {
-                    href: "#",
+                    href: "https://github.com/thelimaofficial",
                     src: githubIcon,
                     alt: "GitHub",
                   },
                   {
-                    href: "#",
+                    href: "https://www.behance.net/thelimaofficial",
                     src: behanceIcon,
                     alt: "Behance",
                   },
@@ -389,15 +394,15 @@ export default function FeedbacksFooterSection({ id }) {
 
               {/* CONTACT */}
 
-              <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center lg:gap-10">
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center lg:gap-10 mt-2 xl:mt-0">
                 <a
                   href="mailto:thelimart@outlook.com"
-                  className="flex items-center gap-3 text-lg text-[#c1c1c1] transition-colors hover:text-white"
+                  className="flex items-center gap-3 text-base md:text-lg text-[#c1c1c1] transition-colors hover:text-white"
                 >
                   <img
                     src={emailIcon}
                     alt="Email"
-                    className="h-10 w-10 object-contain"
+                    className="h-8 w-8 md:h-10 md:w-10 object-contain"
                   />
 
                   <span>thelimart@outlook.com</span>
@@ -405,12 +410,12 @@ export default function FeedbacksFooterSection({ id }) {
 
                 <a
                   href="https://wa.me/5511963815913"
-                  className="flex items-center gap-3 text-lg text-[#c1c1c1] transition-colors hover:text-white"
+                  className="flex items-center gap-3 text-base md:text-lg text-[#c1c1c1] transition-colors hover:text-white"
                 >
                   <img
                     src={wppIcon}
                     alt="WhatsApp"
-                    className="h-10 w-10 object-contain"
+                    className="h-8 w-8 md:h-10 md:w-10 object-contain"
                   />
 
                   <span>+55 (11) 96381-5913</span>
@@ -420,21 +425,42 @@ export default function FeedbacksFooterSection({ id }) {
 
             {/* BOTTOM */}
 
-            <div className="mt-auto flex flex-col items-end justify-between gap-10 pt-12 lg:flex-row lg:gap-0">
+            <div className="mt-auto flex flex-col items-center justify-between gap-6 pt-6 md:gap-12 md:pt-16 lg:flex-row lg:items-end lg:gap-0">
               {/* LOGO */}
 
               <div
                 ref={footerLogoRef}
-                className="order-2 flex flex-col items-center lg:order-1 lg:items-start"
+                className="order-2 flex flex-col items-center lg:order-1 lg:items-start w-full lg:w-auto"
               >
                 <img
                   src={logo}
                   alt="Lima Logo"
-                  className="mb-4 h-20 origin-center object-contain sm:h-28 lg:h-32 lg:origin-left"
+                  className="mb-2 md:mb-4 h-16 origin-center object-contain sm:h-28 lg:h-32 lg:origin-left"
                 />
 
-                <div className="text-center text-sm text-[#888] lg:text-left">
-                  © 2026 Lima. All rights reserved.
+                <div className="text-center text-sm text-[#888] lg:text-left flex flex-col gap-3">
+                  <p>© 2026 Lima. All rights reserved.</p>
+                  
+                  {/* MOBILE PRIVACY POLICY (Hidden on Desktop) */}
+                  <div className="lg:hidden mt-2">
+                    <a
+                      href="#"
+                      className="transition-colors hover:text-white"
+                    >
+                      Privacy Policy
+                    </a>
+
+                    {" • "}Developed by{" "}
+
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-white transition-opacity hover:opacity-80"
+                    >
+                      Alwer
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -453,7 +479,7 @@ export default function FeedbacksFooterSection({ id }) {
                   </span>
                 </h2>
 
-                <div className="mb-6 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row sm:gap-6 lg:justify-end">
+                <div className="mb-6 flex w-full flex-col items-center justify-center gap-4 sm:flex-row lg:justify-end">
                   <Button
                     variant="primary"
                     size="normal"
@@ -473,7 +499,8 @@ export default function FeedbacksFooterSection({ id }) {
                   </Button>
                 </div>
 
-                <div className="text-sm text-[#888]">
+                {/* DESKTOP PRIVACY POLICY (Hidden on Mobile) */}
+                <div className="hidden lg:block text-sm text-[#888]">
                   <a
                     href="#"
                     className="transition-colors hover:text-white"

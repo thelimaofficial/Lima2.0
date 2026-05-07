@@ -1,6 +1,6 @@
-import { useRef } from "react";
 import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -25,106 +25,121 @@ export default function Thumbnails({ id }) {
   useGSAP(() => {
     if (imgRefs.current.length === 0) return;
 
-    // Estados Estritos
+    // Estados Estritos com Efeito 3D (Coverflow + Arc)
     const states = {
-      farLeft:  { xPercent: -170, scale: 0.7,  opacity: 0,   filter: "blur(4px)", zIndex: -1 },
-      left:     { xPercent: -110, scale: 0.85, opacity: 0.6, filter: "blur(2px)", zIndex: 0 },
-      center:   { xPercent: -50,  scale: 1,    opacity: 1,   filter: "blur(0px)", zIndex: 10 },
-      right:    { xPercent: 10,   scale: 0.85, opacity: 0.6, filter: "blur(2px)", zIndex: 0 },
-      farRight: { xPercent: 70,   scale: 0.7,  opacity: 0,   filter: "blur(4px)", zIndex: -1 },
+      farLeft:  { xPercent: -160, yPercent: -35, scale: 0.65, opacity: 0,   filter: "blur(6px)", rotationY: 35,  rotationZ: -4, zIndex: -1 },
+      left:     { xPercent: -105, yPercent: -42, scale: 0.8,  opacity: 0.5, filter: "blur(2px)", rotationY: 20,  rotationZ: -2, zIndex: 0 },
+      center:   { xPercent: -50,  yPercent: -50, scale: 1,    opacity: 1,   filter: "blur(0px)", rotationY: 0,   rotationZ: 0,  zIndex: 10 },
+      right:    { xPercent: 5,    yPercent: -42, scale: 0.8,  opacity: 0.5, filter: "blur(2px)", rotationY: -20, rotationZ: 2,  zIndex: 0 },
+      farRight: { xPercent: 60,   yPercent: -35, scale: 0.65, opacity: 0,   filter: "blur(6px)", rotationY: -35, rotationZ: 4,  zIndex: -1 },
     };
+
+    const hiddenLeft = { ...states.farLeft, xPercent: -215, opacity: 0, filter: "blur(10px)" };
+    const hiddenRight = { ...states.farRight, xPercent: 115, opacity: 0, filter: "blur(10px)" };
+
+    const TOTAL = images.length;
+    
+    // Constrói o trilho completo de posições baseado no número de imagens
+    const track = new Array(TOTAL);
+    for (let j = 0; j < TOTAL; j++) {
+      if (j === 3) track[j] = states.center;
+      else if (j === 2) track[j] = states.left;
+      else if (j === 1) track[j] = states.farLeft;
+      else if (j === 4) track[j] = states.right;
+      else if (j === 5) track[j] = states.farRight;
+      else if (j < 1) track[j] = hiddenLeft;
+      else if (j > 5) track[j] = hiddenRight;
+    }
 
     // Configuração do Estado Inicial
     images.forEach((_, i) => {
       const el = imgRefs.current[i];
       if (!el) return;
 
-      gsap.set(el, { left: "50%", top: "50%", yPercent: -50, position: "absolute", force3D: true });
+      gsap.set(el, { left: "50%", top: "50%", yPercent: -50, position: "absolute", force3D: true, transformOrigin: "center center" });
 
-      if (i === 0) {
-        gsap.set(el, states.center);
-      } else if (i === 1) {
-        gsap.set(el, states.right);
-      } else {
-        gsap.set(el, states.farRight);
-      }
+      const startPos = ((i + 3) % TOTAL + TOTAL) % TOTAL;
+      gsap.set(el, track[startPos]);
     });
+
+    const LOOPS = 1; // Quantas vezes as imagens vão girar completamente
+    const totalSteps = TOTAL * LOOPS;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: `+=${images.length * 1000}`,
+        end: `+=${totalSteps * 650}`, // Aumenta a duração do scroll proporcionalmente
         scrub: 0.5,
         pin: true,
         fastScrollEnd: true,
       }
     });
 
-    // Mapeamento Contínuo por Imagem (O "Trilho")
-    // Em vez de misturar ordens, damos a cada imagem seu próprio trilho de animação do início ao fim.
-    images.forEach((_, i) => {
-      const el = imgRefs.current[i];
-      if (!el) return;
+    // Mapeamento Contínuo e Infinito
+    for (let step = 1; step <= totalSteps; step++) {
+      images.forEach((_, i) => {
+        const el = imgRefs.current[i];
+        if (!el) return;
 
-      const TOTAL = images.length;
-      const easeType = "power1.inOut";
+        const prevPos = ((i + 3 - (step - 1)) % TOTAL + TOTAL) % TOTAL;
+        const newPos = ((i + 3 - step) % TOTAL + TOTAL) % TOTAL;
 
-      // Passo 1: Vem da Direita Extrema para a Direita (Começa no tempo i-2)
-      if (i - 2 >= 0) {
-        tl.to(el, { ...states.right, duration: 1, ease: easeType }, i - 2);
-      }
-      
-      // Passo 2: Vem da Direita para o Centro (Começa no tempo i-1)
-      if (i - 1 >= 0) {
-        tl.to(el, { ...states.center, duration: 1, ease: easeType }, i - 1);
-      }
-
-      // Passo 3: Vai do Centro para a Esquerda (Começa no tempo i)
-      if (i < TOTAL - 1) {
-         tl.to(el, { ...states.left, duration: 1, ease: easeType }, i);
-      }
-
-      // Passo 4: Vai da Esquerda para a Esquerda Extrema (Começa no tempo i+1)
-      if (i + 1 < TOTAL - 1) {
-        tl.to(el, { ...states.farLeft, duration: 1, ease: easeType }, i + 1);
-      }
-    });
+        // Se a imagem chegou na ponta invisível da esquerda, ela "teletransporta" para a ponta direita
+        if (prevPos === 0 && newPos === TOTAL - 1) {
+          tl.set(el, track[newPos], step - 1);
+        } else {
+          tl.to(el, { ...track[newPos], duration: 1, ease: "power1.inOut" }, step - 1);
+        }
+      });
+    }
 
   }, { scope: sectionRef });
 
   return (
-    <Section id={id} className="bg-[#090909] min-h-screen flex flex-col justify-center py-20 md:py-28 lg:py-32 overflow-hidden" ref={sectionRef}>
-      <Container>
-        <div className="mb-16 md:mb-20">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
-            Thumbnails
-          </h2>
-          <h3 className="text-4xl md:text-6xl font-bold text-white uppercase tracking-tight">
-            BUILT FOR <span className="bg-gradient-to-r from-[#F85300] to-[#FF8700] bg-clip-text text-transparent">CLICKS</span>
-          </h3>
+    <section id={id} className="w-full bg-[#090909]" ref={sectionRef}>
+      <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden">
+        {/* ========================= */}
+        {/* HEADING */}
+        {/* ========================= */}
+        
+        <div className="relative z-10 shrink-0 pt-12">
+          <Container>
+            <h2 className="mb-2 text-3xl font-semibold text-white md:text-4xl">
+              Thumbnails
+            </h2>
+            <h3 className="text-4xl font-bold uppercase tracking-tight text-white md:text-6xl">
+              BUILT FOR <span className="bg-gradient-to-r from-[#F85300] to-[#FF8700] bg-clip-text text-transparent">CLICKS</span>
+            </h3>
+          </Container>
         </div>
-      </Container>
 
-      {/* GSAP Animated Dynamic Carousel */}
-      <div ref={containerRef} className="relative flex justify-center items-center w-full mx-auto h-[220px] sm:h-[320px] md:h-[420px] lg:h-[520px]">
-        {images.map((src, index) => (
-          <div 
-            key={index} 
-            ref={el => imgRefs.current[index] = el} 
-            className="w-[70%] md:w-[45%] rounded-2xl md:rounded-[40px] shadow-2xl overflow-hidden"
-            style={{ willChange: "transform, filter, opacity, z-index" }}
-          >
-            <img 
-              src={src} 
-              alt={`Thumbnail ${index + 1}`} 
-              decoding="async"
-              loading="lazy"
-              className="w-full h-full object-cover" 
-            />
+        {/* ========================= */}
+        {/* CAROUSEL AREA */}
+        {/* ========================= */}
+
+        <div className="relative flex flex-1 items-center justify-center">
+          {/* GSAP Animated Dynamic Carousel */}
+          <div ref={containerRef} className="relative flex justify-center items-center w-full mx-auto h-[220px] sm:h-[320px] md:h-[420px] lg:h-[520px]" style={{ perspective: "1200px" }}>
+            {images.map((src, index) => (
+              <div 
+                key={index} 
+                ref={el => imgRefs.current[index] = el} 
+                className="w-[70%] md:w-[45%] rounded-2xl md:rounded-[40px] shadow-2xl overflow-hidden"
+                style={{ willChange: "transform, filter, opacity, z-index" }}
+              >
+                <img 
+                  src={src} 
+                  alt={`Thumbnail ${index + 1}`} 
+                  decoding="async"
+                  loading="lazy"
+                  className="w-full h-full object-cover" 
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

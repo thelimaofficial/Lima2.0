@@ -16,16 +16,16 @@ function App() {
     // =========================
 
     const lenis = new Lenis({
-      duration: 0.9,
+      duration: 1.2, // Aumentado para uma desaceleração mais suave
 
       easing: (t) =>
         Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 
       smoothWheel: true,
-      smoothTouch: false,
+      syncTouch: true, // Mantém a sincronização de touch
 
       wheelMultiplier: 1,
-      touchMultiplier: 1,
+      touchMultiplier: 1.2, // Reduzido de 2 para 1.2 para ficar menos brusco e mais fluído
     });
 
     // =========================

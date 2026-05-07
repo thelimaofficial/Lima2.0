@@ -1,50 +1,31 @@
-import { lazy, Suspense } from "react";
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-// =========================
-// SECTIONS
-// =========================
+import HeroCTA from "../sections/HeroCTA/HeroCTA";
+import Thumbnails from "../sections/Thumbnails/Thumbnails";
+import Websites from "../sections/Websites/Websites";
+import About from "../sections/About/About";
+import FeedbacksFooterSection from "../sections/FeedbacksFooterSection/FeedbacksFooterSection";
 
-const Hero = lazy(() =>
-  import("../sections/Hero/Hero")
-);
-
-const CTA = lazy(() =>
-  import("../sections/CTA/CTA")
-);
-
-const Thumbnails = lazy(() =>
-  import("../sections/Thumbnails/Thumbnails")
-);
-
-const Websites = lazy(() =>
-  import("../sections/Websites/Websites")
-);
-
-const About = lazy(() =>
-  import("../sections/About/About")
-);
-
-const FeedbacksFooterSection = lazy(() =>
-  import("../sections/Feedbacks/Feedbacks")
-);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const mainRef = useRef(null);
+
+  // Home scope setup - other global animations can go here
+  useGSAP(() => {
+    // ... Any page level animations if needed
+  }, { scope: mainRef });
+
   return (
-    <main
-      className="
-        min-h-screen
-        bg-[#090909]
-        text-white
-      "
-    >
-      <Suspense fallback={null}>
-        <Hero />
-        <CTA />
-        <Thumbnails id="projects" />
-        <Websites />
-        <About />
-        <FeedbacksFooterSection />
-      </Suspense>
+    <main ref={mainRef} className="bg-black text-white overflow-x-hidden relative">
+      <HeroCTA />
+      <Thumbnails id="projects"/>
+      <Websites />
+      <About />
+      <FeedbacksFooterSection />
     </main>
   );
 }
