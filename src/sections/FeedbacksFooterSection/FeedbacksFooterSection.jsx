@@ -82,9 +82,7 @@ export default function FeedbacksFooterSection({ id }) {
     const ctx = gsap.context(() => {
       const cards = cardsRef.current;
 
-      // =========================
       // INITIAL STATES
-      // =========================
 
       cards.forEach((card, i) => {
         const cfg = stackConfig[i] || {
@@ -126,9 +124,7 @@ export default function FeedbacksFooterSection({ id }) {
         }
       );
 
-      // =========================
       // TIMELINE
-      // =========================
 
       const cardStep = 1;
       const cardEntry = 0.8;
@@ -148,9 +144,7 @@ export default function FeedbacksFooterSection({ id }) {
         },
       });
 
-      // =========================
       // CARDS STACK
-      // =========================
 
       cards.forEach((card, i) => {
         const cfg = stackConfig[i];
@@ -169,9 +163,7 @@ export default function FeedbacksFooterSection({ id }) {
         );
       });
 
-      // =========================
       // EXIT FEEDBACKS
-      // =========================
 
       tl.to(
         [headingRef.current, cardsAreaRef.current],
@@ -184,9 +176,7 @@ export default function FeedbacksFooterSection({ id }) {
         transitionStart
       );
 
-      // =========================
       // FOOTER ENTER
-      // =========================
 
       tl.to(
         footerRef.current,
@@ -237,9 +227,7 @@ export default function FeedbacksFooterSection({ id }) {
       className="w-full bg-[#090909]"
     >
       <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden">
-        {/* ========================= */}
         {/* HEADING */}
-        {/* ========================= */}
 
         <div
           ref={headingRef}
@@ -259,9 +247,7 @@ export default function FeedbacksFooterSection({ id }) {
           </Container>
         </div>
 
-        {/* ========================= */}
         {/* CARDS AREA */}
-        {/* ========================= */}
 
         <div
           ref={cardsAreaRef}
@@ -320,9 +306,7 @@ export default function FeedbacksFooterSection({ id }) {
           ))}
         </div>
 
-        {/* ========================= */}
         {/* FOOTER */}
-        {/* ========================= */}
 
         <footer
           ref={footerRef}

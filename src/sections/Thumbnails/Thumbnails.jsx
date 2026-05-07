@@ -24,7 +24,7 @@ export default function Thumbnails({ id }) {
   useGSAP(() => {
     if (imgRefs.current.length === 0) return;
 
-    // Estados Estritos com Efeito 3D (Coverflow + Arc)
+    // Strict States with 3D Effect (Coverflow + Arc)
     const states = {
       farLeft:  { xPercent: -160, yPercent: -35, scale: 0.65, opacity: 0,   filter: "blur(6px)", rotationY: 35,  rotationZ: -4, zIndex: -1 },
       left:     { xPercent: -105, yPercent: -42, scale: 0.8,  opacity: 0.5, filter: "blur(2px)", rotationY: 20,  rotationZ: -2, zIndex: 0 },
@@ -38,7 +38,7 @@ export default function Thumbnails({ id }) {
 
     const TOTAL = images.length;
     
-    // Constrói o trilho completo de posições baseado no número de imagens
+    // Builds the complete track of positions based on number of images
     const track = new Array(TOTAL);
     for (let j = 0; j < TOTAL; j++) {
       if (j === 3) track[j] = states.center;
@@ -50,7 +50,7 @@ export default function Thumbnails({ id }) {
       else if (j > 5) track[j] = hiddenRight;
     }
 
-    // Configuração do Estado Inicial
+    // Initial State Setup
     images.forEach((_, i) => {
       const el = imgRefs.current[i];
       if (!el) return;
@@ -61,21 +61,21 @@ export default function Thumbnails({ id }) {
       gsap.set(el, track[startPos]);
     });
 
-    const LOOPS = 1; // Quantas vezes as imagens vão girar completamente
+    const LOOPS = 1; // How many times the images will spin completely
     const totalSteps = TOTAL * LOOPS;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: `+=${totalSteps * 650}`, // Aumenta a duração do scroll proporcionalmente
+        end: `+=${totalSteps * 650}`, // Proportionally increases scroll duration
         scrub: 0.5,
         pin: true,
         fastScrollEnd: true,
       }
     });
 
-    // Mapeamento Contínuo e Infinito
+    // Continuous and Infinite Mapping
     for (let step = 1; step <= totalSteps; step++) {
       images.forEach((_, i) => {
         const el = imgRefs.current[i];
@@ -84,11 +84,11 @@ export default function Thumbnails({ id }) {
         const prevPos = ((i + 3 - (step - 1)) % TOTAL + TOTAL) % TOTAL;
         const newPos = ((i + 3 - step) % TOTAL + TOTAL) % TOTAL;
 
-        // Se a imagem chegou na ponta invisível da esquerda, ela "teletransporta" para a ponta direita
+        // If image reached invisible left edge, teleport it to the right edge
         if (prevPos === 0 && newPos === TOTAL - 1) {
           tl.set(el, track[newPos], step - 1);
         } else {
-          tl.to(el, { ...track[newPos], duration: 1, ease: "power1.inOut" }, step - 1);
+          tl.fromTo(el, { ...track[prevPos] }, { ...track[newPos], duration: 1, ease: "power1.inOut" }, step - 1);
         }
       });
     }
@@ -98,9 +98,7 @@ export default function Thumbnails({ id }) {
   return (
     <section id={id} className="w-full bg-[#090909]" ref={sectionRef}>
       <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden">
-        {/* ========================= */}
         {/* HEADING */}
-        {/* ========================= */}
         
         <div className="relative z-10 shrink-0 pt-12">
           <Container>
@@ -113,9 +111,7 @@ export default function Thumbnails({ id }) {
           </Container>
         </div>
 
-        {/* ========================= */}
         {/* CAROUSEL AREA */}
-        {/* ========================= */}
 
         <div className="relative flex flex-1 items-center justify-center">
           {/* GSAP Animated Dynamic Carousel */}
