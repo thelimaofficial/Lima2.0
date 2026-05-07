@@ -61,35 +61,73 @@ export default function Thumbnails({ id }) {
       }
     });
 
-    // Mapeamento Contínuo por Imagem (O "Trilho")
-    // Em vez de misturar ordens, damos a cada imagem seu próprio trilho de animação do início ao fim.
+    const TOTAL = images.length;
+    const easeType = "power1.inOut";
+
     images.forEach((_, i) => {
       const el = imgRefs.current[i];
       if (!el) return;
 
-      const TOTAL = images.length;
-      const easeType = "power1.inOut";
+      // Reseta qualquer transição residual do GSAP
+      gsap.set(el, { x: 0 });
 
-      // Passo 1: Vem da Direita Extrema para a Direita (Começa no tempo i-2)
-      if (i - 2 >= 0) {
-        tl.to(el, { ...states.right, duration: 1, ease: easeType }, i - 2);
-      }
+      // O truque para não haver drift matemático é usar UMA única animação encadeada via sub-timeline
+      // ou keyframes contínuos para evitar sobreposições de interpolação no scrub.
+
+      // O truque para não haver drift matemático é usar UMA única animação encadeada via sub-timeline
+      // usando .fromTo() para garantir estados iniciais absolutos, evitando sobreposições de interpolação no scrub.
+
+      const tlImg = gsap.timeline();
       
-      // Passo 2: Vem da Direita para o Centro (Começa no tempo i-1)
-      if (i - 1 >= 0) {
-        tl.to(el, { ...states.center, duration: 1, ease: easeType }, i - 1);
+      // Estado Inicial
+      let currentState = states.farRight;
+      if (i === 0) currentState = states.center;
+      if (i === 1) currentState = states.right;
+
+      // De 0 a i-2: Fica em farRight (esperando)
+      if (i > 2) {
+        tlImg.fromTo(el, currentState, { ...states.farRight, duration: i - 2, ease: "none" });
+        currentState = states.farRight;
+      } else if (i === 2) {
+        currentState = states.farRight;
       }
 
-      // Passo 3: Vai do Centro para a Esquerda (Começa no tempo i)
+      // De i-2 a i-1: Move para a direita
+      if (i > 1) {
+        tlImg.fromTo(el, currentState, { ...states.right, duration: 1, ease: easeType });
+        currentState = states.right;
+      }
+
+      // De i-1 a i: Move para o centro
+      if (i > 0) {
+        tlImg.fromTo(el, currentState, { ...states.center, duration: 1, ease: easeType });
+        currentState = states.center;
+      }
+
+      // De i a i+1: Move para a esquerda
       if (i < TOTAL - 1) {
-        tl.to(el, { ...states.left, duration: 1, ease: easeType }, i);
+        tlImg.fromTo(el, currentState, { ...states.left, duration: 1, ease: easeType });
+        currentState = states.left;
       }
 
-      // Passo 4: Vai da Esquerda para a Esquerda Extrema (Começa no tempo i+1)
-      if (i + 1 < TOTAL - 1) {
-        tl.to(el, { ...states.farLeft, duration: 1, ease: easeType }, i + 1);
+      // De i+1 a i+2: Move para a esquerda extrema
+      if (i < TOTAL - 2) {
+        tlImg.fromTo(el, currentState, { ...states.farLeft, duration: 1, ease: easeType });
+        currentState = states.farLeft;
       }
+
+      // De i+2 até o fim: Fica na esquerda extrema (esperando)
+      if (i < TOTAL - 3) {
+         const remaining = (TOTAL - 1) - (i + 2);
+         tlImg.fromTo(el, currentState, { ...states.farLeft, duration: remaining, ease: "none" });
+      }
+
+      // Anexa essa timeline de animação da imagem na linha do tempo principal
+      tl.add(tlImg, 0);
     });
+
+    // Força a duração da linha do tempo principal para garantir que os mapeamentos não cortem
+    tl.to({}, { duration: 0.001 }, TOTAL - 1);
 
   }, { scope: sectionRef });
 
