@@ -1,16 +1,26 @@
-# React + Vite
+# Lima 2.0 - Portfolio de Alto Impacto
+**Site Oficial:** [https://thelimaofficial.com/](https://thelimaofficial.com/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Este projeto é a versão 2.0 do portfolio oficial do **Lima**, focado em design e desenvolvimento de thumbnails, websites e soluções visuais que convertem. A aplicação foi construída com foco em performance extrema, animações fluidas e uma experiência de usuário premium.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Tecnologias Utilizadas
 
-## React Compiler
+- **React**: Biblioteca base para a construção da interface.
+- **Vite**: Build tool de última geração para um desenvolvimento rápido.
+- **GSAP (GreenSock Animation Platform)**: Motor de animações utilizado para transições complexas e efeitos baseados em scroll.
+- **Lenis**: Biblioteca de Smooth Scroll para garantir uma navegação fluida em todos os navegadores.
+- **Tailwind CSS**: Framework CSS utilitário para estilização moderna e responsiva.
+- **Framer Motion**: Utilizado em complementação para micro-interações.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📂 Estrutura da Página
 
-## Expanding the ESLint configuration
+A aplicação é composta por uma Landing Page dinâmica com as seguintes seções:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.  **Hero CTA**: Apresentação principal com chamada para ação imediata.
+2.  **Thumbnails**: Galeria interativa exibindo trabalhos de design para YouTube.
+3.  **Websites**: Vitrine de projetos de desenvolvimento web com foco em design moderno.
+4.  **About**: Espaço dedicado à trajetória e visão do profissional.
+5.  **Feedbacks & Footer**: Seção de depoimentos de clientes e canais de contato integrados.
+
+Desenvolvido por **Lima** & **Alwer**.

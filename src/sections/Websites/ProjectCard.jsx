@@ -16,29 +16,9 @@ export default function ProjectCard({ image, alt }) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // =========================
-      // INITIAL STATES
-      // =========================
 
-      gsap.set(cardRef.current, {
-        scale: 0.86,
-        borderRadius: "28px",
-        transformOrigin: "center center",
-        force3D: true,
-      });
 
-      gsap.set(imageRef.current, {
-        scale: 1.12,
-        force3D: true,
-      });
-
-      gsap.set(overlayRef.current, {
-        opacity: 0.45,
-      });
-
-      // =========================
       // TIMELINE
-      // =========================
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -54,51 +34,51 @@ export default function ProjectCard({ image, alt }) {
         },
       });
 
-      // =========================
       // CARD SCALE
-      // =========================
 
-      tl.to(
+      tl.fromTo(
         cardRef.current,
         {
+          scale: 0.86,
+          borderRadius: "28px",
+          transformOrigin: "center center",
+          force3D: true,
+        },
+        {
           scale: 1,
-
           borderRadius: "0px",
-
           ease: "none",
-
           duration: 1,
         },
         0
       );
 
-      // =========================
       // IMAGE SCALE
-      // =========================
 
-      tl.to(
+      tl.fromTo(
         imageRef.current,
         {
+          scale: 1.12,
+          force3D: true,
+        },
+        {
           scale: 1,
-
           ease: "none",
-
           duration: 1,
         },
         0
       );
 
-      // =========================
       // OVERLAY FADE
-      // =========================
 
-      tl.to(
+      tl.fromTo(
         overlayRef.current,
         {
+          opacity: 0.45,
+        },
+        {
           opacity: 0,
-
           ease: "none",
-
           duration: 1,
         },
         0

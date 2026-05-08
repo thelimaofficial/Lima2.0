@@ -82,9 +82,7 @@ export default function FeedbacksFooterSection({ id }) {
     const ctx = gsap.context(() => {
       const cards = cardsRef.current;
 
-      // =========================
       // INITIAL STATES
-      // =========================
 
       cards.forEach((card, i) => {
         const cfg = stackConfig[i] || {
@@ -126,9 +124,7 @@ export default function FeedbacksFooterSection({ id }) {
         }
       );
 
-      // =========================
       // TIMELINE
-      // =========================
 
       const cardStep = 1;
       const cardEntry = 0.8;
@@ -148,9 +144,7 @@ export default function FeedbacksFooterSection({ id }) {
         },
       });
 
-      // =========================
       // CARDS STACK
-      // =========================
 
       cards.forEach((card, i) => {
         const cfg = stackConfig[i];
@@ -169,9 +163,7 @@ export default function FeedbacksFooterSection({ id }) {
         );
       });
 
-      // =========================
       // EXIT FEEDBACKS
-      // =========================
 
       tl.to(
         [headingRef.current, cardsAreaRef.current],
@@ -184,9 +176,7 @@ export default function FeedbacksFooterSection({ id }) {
         transitionStart
       );
 
-      // =========================
       // FOOTER ENTER
-      // =========================
 
       tl.to(
         footerRef.current,
@@ -429,12 +419,12 @@ export default function FeedbacksFooterSection({ id }) {
                 <img
                   src={logo}
                   alt="Lima Logo"
-                  className="mb-2 md:mb-4 h-16 origin-center object-contain sm:h-28 lg:h-32 lg:origin-left"
+                  className="mb-2 md:mb-4 h-20 origin-center object-contain sm:h-36 lg:h-48 lg:origin-left"
                 />
 
                 <div className="text-center text-sm text-[#888] lg:text-left flex flex-col gap-3">
                   <p>© 2026 Lima. All rights reserved.</p>
-
+                  
                   {/* MOBILE PRIVACY POLICY (Hidden on Desktop) */}
                   <div className="lg:hidden mt-2">
                     <a

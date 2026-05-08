@@ -12,21 +12,21 @@ export default function HeroCTA() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    // 1. Pinar a Hero section para que ela fique fixa enquanto o CTA rola por cima
+    // 1. Pin the Hero section so it stays fixed while CTA scrolls over
     ScrollTrigger.create({
       trigger: ".hero-section",
       start: "top top",
-      end: "bottom top",
+      end: "bottom top", 
       pin: true,
-      pinSpacing: false, // Permite que a próxima seção (CTA) passe por cima
+      pinSpacing: false, // Allows the next section (CTA) to pass over
     });
 
-    // 2. Animar a saída da Hero sincronizada com a entrada do CTA
+    // 2. Animate Hero exit synced with CTA entry
     const heroTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".cta-container",
-        start: "top bottom", // Inicia quando o topo do CTA entra na tela
-        end: "top top",      // Termina quando o topo do CTA chega no topo
+        start: "top bottom", // Starts when CTA top enters screen
+        end: "top top",      // Ends when CTA top reaches top
         scrub: true,
       }
     });
@@ -35,7 +35,7 @@ export default function HeroCTA() {
     heroTl.to(".hero-header", { yPercent: -100, opacity: 0, duration: 0.5 }, 0);
     heroTl.to(".hero-glow", { opacity: 0.1, scale: 1.1, duration: 1 }, 0);
 
-    // 3. Transição suave entre Hero e CTA: O CTA expande revelando o conteúdo
+    // 3. Smooth transition between Hero and CTA: CTA expands revealing content
     gsap.fromTo(".cta-container",
       { clipPath: "inset(15% 5% 0% 5% round 48px)" },
       {
@@ -50,8 +50,8 @@ export default function HeroCTA() {
       }
     );
 
-    // 4. Foco no CTA: as palavras surgem com um atraso suave durante o scroll
-    // Removido o scrub para garantir que a animação termine independentemente da rolagem
+    // 4. Focus on CTA: words appear with a slight delay during scroll
+    // Scrub removed to ensure animation finishes independent of scroll
     gsap.fromTo(".cta-word",
       { yPercent: 120, rotationZ: 5, opacity: 0 },
       {
@@ -63,8 +63,8 @@ export default function HeroCTA() {
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".cta-container",
-          start: "top 60%", // Inicia quando o CTA estiver bem visível
-          toggleActions: "play none none reverse", // Toca ao descer, reverte ao subir
+          start: "top 60%", // Starts when CTA is well visible
+          toggleActions: "play none none reverse", // Play on scroll down, reverse on up
         }
       }
     );
