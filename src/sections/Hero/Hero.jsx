@@ -17,7 +17,7 @@ export default function Hero() {
       {/* HEADER */}
       <div className="absolute top-0 left-0 w-full p-10 lg:px-24 z-40 flex justify-between items-center hero-header">
         <img src={logo} alt="Lima Logo" className="h-12 md:h-16" />
-        <Button variant="secondary" size="small">
+        <Button variant="secondary" size="small" href="https://www.x.com/thelimaofficial" target="_blank" rel="noopener noreferrer">
           Get in touch
         </Button>
       </div>
@@ -39,7 +39,7 @@ export default function Hero() {
               View Projects
             </Button>
 
-            <Button variant="secondary" size="normal">
+            <Button variant="secondary" size="normal" href="https://www.x.com/thelimaofficial" target="_blank" rel="noopener noreferrer">
               Get in touch
             </Button>
           </div>
