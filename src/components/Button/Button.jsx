@@ -15,9 +15,10 @@ export default function Button({
 }) {
   // COMPONENT TYPE
 
-  const isLink = Boolean(href);
+  const isHashLink = Boolean(href && href.startsWith("#"));
+  const isExternalLink = Boolean(href && !isHashLink);
 
-  const Component = isLink ? "a" : "button";
+  const Component = isExternalLink ? "a" : "button";
 
   // STYLES
 
@@ -119,7 +120,7 @@ export default function Button({
   const handleClick = (e) => {
     // Anchor scroll with Lenis
 
-    if (href && href.startsWith("#")) {
+    if (isHashLink) {
       e.preventDefault();
 
       if (window.lenis) {
@@ -145,7 +146,7 @@ export default function Button({
   return (
     <Component
       {...props}
-      href={href}
+      href={isExternalLink ? href : undefined}
       onClick={handleClick}
       className={`
         group
@@ -154,7 +155,7 @@ export default function Button({
         ${variantClasses[variant]}
         ${className}
       `}
-      type={!isLink ? "button" : undefined}
+      type={!isExternalLink ? "button" : undefined}
     >
       {/* LEFT ICON (For Back variant) */}
       {isBack && (

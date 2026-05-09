@@ -43,6 +43,11 @@ export default function Home() {
           window.scrollTo(0, 0);
         }
       }
+
+      // Clear the hash from the URL to keep it clean
+      if (hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
     };
 
     setTimeout(scrollToTarget, 50);

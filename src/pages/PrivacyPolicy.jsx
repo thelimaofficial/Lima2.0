@@ -350,7 +350,7 @@ export default function PrivacyPolicy() {
 
         {/* Back Button */}
         <div className="w-full px-10 lg:px-24 pt-12 md:pt-16 flex justify-start">
-          <Link to="/#home">
+          <Link to="/">
             <Button variant="back" size="normal">
               Back
             </Button>
