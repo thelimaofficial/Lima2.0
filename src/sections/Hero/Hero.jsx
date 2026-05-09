@@ -3,7 +3,7 @@ import Button from "../../components/Button/Button";
 import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
 
-export default function Hero() {
+export default function Hero( ) {
   return (
     <Section className="h-screen text-white overflow-hidden flex items-center !py-0 hero-section">
 
@@ -26,7 +26,7 @@ export default function Hero() {
       <Container className="relative z-10 hero-content">
         <div className="flex flex-col items-center text-center max-w-6xl mx-auto">
           <h1 className="text-[40px] md:text-[70px] font-bold leading-[1.05] tracking-tighter mb-8 max-w-[1100px]">
-            Helping companies build <span className="bg-gradient-to-r from-[#F85300] to-[#FF8700] bg-clip-text text-transparent whitespace-nowrap">digital products</span> that actually convert<span className="text-[#ff8700]">.</span>
+            Helping companies build <span className="bg-gradient-to-r from-[#F85300] to-[#FF8700] bg-clip-text text-transparent whitespace-nowrap">digital products</span> that actually convert<span className="bg-gradient-to-r from-[#F85300] to-[#FF8700] bg-clip-text text-transparent">.</span>
           </h1>
 
           <p className="text-[17px] md:text-[22px] text-[#c1c1c1] mb-10 max-w-[700px] mx-auto leading-relaxed">

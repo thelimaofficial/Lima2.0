@@ -21,7 +21,10 @@ export default function Button({
 
   // STYLES
 
+  const isBack = variant === "back";
+
   const baseClasses = `
+    group
     inline-flex
     items-center
     rounded-full
@@ -43,11 +46,13 @@ export default function Button({
   `;
 
   const sizeClasses = {
-    normal:
-      "pl-5 pr-1.5 py-1.5 text-[15px] gap-2",
+    normal: isBack 
+      ? "pr-6 pl-1.5 py-1.5 text-[15px] gap-3" 
+      : "pl-5 pr-1.5 py-1.5 text-[15px] gap-2",
 
-    small:
-      "pl-5 pr-1.5 py-1.5 text-[14px] gap-2",
+    small: isBack 
+      ? "pr-5 pl-1.5 py-1.5 text-[14px] gap-3" 
+      : "pl-5 pr-1.5 py-1.5 text-[14px] gap-2",
   };
 
   const variantClasses = {
@@ -60,6 +65,16 @@ export default function Button({
     `,
 
     secondary: `
+      border
+      border-[#333333]
+
+      bg-[#111111]/70
+
+      hover:border-[#555555]
+      hover:bg-[#1a1a1a]
+    `,
+
+    back: `
       border
       border-[#333333]
 
@@ -83,6 +98,14 @@ export default function Button({
     `,
 
     secondary: `
+      bg-gradient-to-r
+      from-[#F85300]
+      to-[#FF8700]
+
+      text-[#111111]
+    `,
+
+    back: `
       bg-gradient-to-r
       from-[#F85300]
       to-[#FF8700]
@@ -125,6 +148,7 @@ export default function Button({
       href={href}
       onClick={handleClick}
       className={`
+        group
         ${baseClasses}
         ${sizeClasses[size]}
         ${variantClasses[variant]}
@@ -132,45 +156,80 @@ export default function Button({
       `}
       type={!isLink ? "button" : undefined}
     >
-      {/* TEXT */}
+      {/* LEFT ICON (For Back variant) */}
+      {isBack && (
+        <span
+          className={`
+            ${iconColors[variant]}
+            ${iconSizeClasses[size]}
 
+            flex
+            shrink-0
+            items-center
+            justify-center
+
+            rounded-full
+
+            transition-transform
+            duration-300
+
+            group-hover:-translate-x-[2px]
+          `}
+        >
+          <svg
+            width={size === "small" ? "16" : "18"}
+            height={size === "small" ? "16" : "18"}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M19 12H5" />
+            <path d="M12 19l-7-7 7-7" />
+          </svg>
+        </span>
+      )}
+
+      {/* TEXT */}
       <span>{children}</span>
 
-      {/* ICON */}
+      {/* RIGHT ICON (For Primary/Secondary) */}
+      {!isBack && (
+        <span
+          className={`
+            ${iconColors[variant]}
+            ${iconSizeClasses[size]}
 
-      <span
-        className={`
-          ${iconColors[variant]}
-          ${iconSizeClasses[size]}
+            flex
+            shrink-0
+            items-center
+            justify-center
 
-          flex
-          shrink-0
-          items-center
-          justify-center
+            rounded-full
 
-          rounded-full
+            transition-transform
+            duration-300
 
-          transition-transform
-          duration-300
-
-          group-hover:translate-x-[2px]
-        `}
-      >
-        <svg
-          width={size === "small" ? "14" : "15"}
-          height={size === "small" ? "14" : "15"}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+            group-hover:translate-x-[2px]
+          `}
         >
-          <path d="M7 17L17 7" />
-
-          <path d="M7 7h10v10" />
-        </svg>
-      </span>
+          <svg
+            width={size === "small" ? "14" : "15"}
+            height={size === "small" ? "14" : "15"}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </span>
+      )}
     </Component>
   );
 }

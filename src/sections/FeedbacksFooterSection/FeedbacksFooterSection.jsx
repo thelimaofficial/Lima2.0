@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 import Container from "../../components/Container/Container";
 import Button from "../../components/Button/Button";
@@ -64,7 +65,7 @@ const stackConfig = [
   { rotation: 2, x: 28, y: -16, zIndex: 4 },
 ];
 
-export default function FeedbacksFooterSection({ id }) {
+export default function FeedbacksFooterSection({ id, hideFeedbacks = false }) {
   const wrapperRef = useRef(null);
 
   const headingRef = useRef(null);
@@ -79,6 +80,92 @@ export default function FeedbacksFooterSection({ id }) {
   const footerCtaRef = useRef(null);
 
   useEffect(() => {
+    if (hideFeedbacks) {
+      const ctx = gsap.context(() => {
+        gsap.set(footerRef.current, {
+          y: 80,
+          opacity: 0,
+        });
+
+        gsap.set(footerGlowRef.current, {
+          opacity: 0,
+          scale: 0.94,
+        });
+
+        gsap.set(
+          [
+            footerTopRef.current,
+            footerLogoRef.current,
+            footerCtaRef.current,
+          ],
+          {
+            y: 40,
+            opacity: 0,
+          }
+        );
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        // 1. Wrapper background expands beautifully
+        tl.fromTo(
+          wrapperRef.current,
+          { clipPath: "inset(10% 5% 0% 5% round 48px)" },
+          {
+            clipPath: "inset(0% 0% 0% 0% round 0px)",
+            ease: "power3.inOut",
+            duration: 1.2,
+          },
+          0
+        );
+
+        // 2. Elements translate and fade in
+        tl.to(
+          footerRef.current,
+          {
+            y: 0,
+            opacity: 1,
+            ease: "power2.out",
+            duration: 1,
+          },
+          0.3
+        );
+
+        tl.to(
+          footerGlowRef.current,
+          {
+            opacity: 1,
+            scale: 1,
+            ease: "power1.out",
+            duration: 1,
+          },
+          0.4
+        );
+
+        tl.to(
+          [
+            footerTopRef.current,
+            footerLogoRef.current,
+            footerCtaRef.current,
+          ],
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            ease: "power3.out",
+            duration: 0.8,
+          },
+          0.6
+        );
+      }, wrapperRef);
+      return () => ctx.revert();
+    }
+
     const ctx = gsap.context(() => {
       const cards = cardsRef.current;
 
@@ -227,9 +314,11 @@ export default function FeedbacksFooterSection({ id }) {
       className="w-full bg-[#090909]"
     >
       <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden">
-        {/* HEADING */}
+        {!hideFeedbacks && (
+          <>
+            {/* HEADING */}
 
-        <div
+            <div
           ref={headingRef}
           className="relative z-10 shrink-0 pt-12"
         >
@@ -305,6 +394,8 @@ export default function FeedbacksFooterSection({ id }) {
             </div>
           ))}
         </div>
+          </>
+        )}
 
         {/* FOOTER */}
 
@@ -427,12 +518,12 @@ export default function FeedbacksFooterSection({ id }) {
                   
                   {/* MOBILE PRIVACY POLICY (Hidden on Desktop) */}
                   <div className="lg:hidden mt-2">
-                    <a
-                      href="#"
+                    <Link
+                      to="/privacy-policy"
                       className="transition-colors hover:text-white"
                     >
                       Privacy Policy
-                    </a>
+                    </Link>
 
                     {" • "}Developed by{" "}
 
@@ -485,12 +576,12 @@ export default function FeedbacksFooterSection({ id }) {
 
                 {/* DESKTOP PRIVACY POLICY (Hidden on Mobile) */}
                 <div className="hidden lg:block text-sm text-[#888]">
-                  <a
-                    href="#"
+                  <Link
+                    to="/privacy-policy"
                     className="transition-colors hover:text-white"
                   >
                     Privacy Policy
-                  </a>
+                  </Link>
 
                   {" • "}Developed by{" "}
 

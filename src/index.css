@@ -41,6 +41,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   overflow-x: clip;
+
+  /* Prevent text selection globally */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* MEDIA DEFAULTS */
@@ -53,6 +59,12 @@ svg {
   display: block;
 
   max-width: 100%;
+
+  /* Prevent image/media dragging */
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 
 /* GLOW BACKGROUND */

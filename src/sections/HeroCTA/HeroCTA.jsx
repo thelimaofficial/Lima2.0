@@ -8,7 +8,7 @@ import CTA from "../CTA/CTA";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroCTA() {
+export default function HeroCTA({ id }) {
   const containerRef = useRef(null);
 
   useGSAP(() => {
@@ -73,7 +73,7 @@ export default function HeroCTA() {
 
   return (
     <div ref={containerRef} className="relative w-full">
-      <Hero />
+      <Hero id={id} />
       <CTA />
     </div>
   );
